@@ -1,0 +1,175 @@
+---
+interface GnavItem {
+  title: string;
+  href: string;
+}
+const gnavItem: GnavItem[] = [
+  {
+    href: '/about/',
+    title: 'ABOUT',
+  },
+  {
+    href: '/404/',
+    title: '404',
+  },
+  {
+    href: '#',
+    title: 'menu-03',
+  },
+  {
+    href: '#',
+    title: 'menu-04',
+  },
+];
+// headerの場合は、.headerBannersを付与してください
+---
+
+<header class="header" id="header">
+  <div class="headerContainer">
+    <nav class="nav headerNav">
+      <ul class="navList">
+        {
+          gnavItem.map((item: GnavItem, index: number) => (
+            <li class={`navListItem navListItem-0${index + 1}`}>
+              <a href={item.href}>
+                {item.title.split('<br>').map((line) => (
+                  <span>{line}</span>
+                ))}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <button class="menuBox">
+    <div id="menu" class="menu">
+      <span class="menuTop"></span>
+      <span class="menuCenter"></span>
+      <span class="menuBottom"></span>
+    </div>
+  </button>
+</header>
+<script>
+  // クラス名を変数に格納
+  const menuBox: HTMLElement = document.querySelector(
+    '.menuBox'
+  ) as HTMLElement;
+  const menuElements: {
+    top: HTMLElement;
+    center: HTMLElement;
+    bottom: HTMLElement;
+    headerInner: HTMLElement;
+  } = {
+    top: document.querySelector('.menuTop') as HTMLElement,
+    center: document.querySelector('.menuCenter') as HTMLElement,
+    bottom: document.querySelector('.menuBottom') as HTMLElement,
+    headerInner: document.querySelector('.headerInner') as HTMLElement,
+  };
+  const toggleMenu = (): void => {
+    for (const element of Object.values(menuElements)) {
+      element.classList.toggle('active');
+    }
+  };
+  menuBox.addEventListener('click', toggleMenu);
+</script>
+
+<style lang="scss">
+  .headerContainer {
+    height: 70px;
+    padding: 0 20px;
+    background: #fff;
+    @include tab {
+      height: 50px;
+    }
+  }
+  .logo {
+    width: 200px;
+    a {
+      display: block;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  
+  .nav {
+    .navList {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .navListItem {
+      text-align: center;
+      position: relative;
+      @include tab {
+        width: 20%;
+      }
+      a {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  button.menuBox {
+    display: none;
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 11111;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+  .menuTop,
+  .menuCenter,
+  .menuBottom {
+    display: block;
+    width: 30px;
+    height: 2px;
+    border-radius: 20px;
+    background: #000;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .menuTop {
+    top: 42%;
+  }
+  .menuCenter {
+    top: 50%;
+  }
+  .menuBottom {
+    top: 58%;
+  }
+  .menuTop.active {
+    width: 34px;
+    top: 50%;
+    transform: translate(-50%, 0) rotate(30deg);
+  }
+  .menuCenter.active {
+    opacity: 0;
+  }
+  .menuBottom.active {
+    width: 34px;
+    top: 50%;
+    transform: translate(-50%, 0) rotate(-30deg);
+  }
+  .navActive {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .menuTopActive {
+    top: 50%;
+    transform: translate(-50%, 0) rotate(30deg);
+  }
+  .menuCenterActive {
+    opacity: 0;
+  }
+  .menuBottomActive {
+    top: 50%;
+    transform: translate(-50%, 0) rotate(-30deg);
+  }
+</style>

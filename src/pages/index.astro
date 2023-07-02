@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+import Section from '../sections/section.astro';
+---
+
+<Layout title="title">
+  <Header />
+  <main>
+    <Section />
+  </main>
+  <Footer />
+</Layout>
+<script>
+// すべてのimgタグを取得
+const imgElements = document.getElementsByTagName('img');
+
+// 各imgタグに対して処理を実行
+for (const img of imgElements) {
+  // 画像の読み込みが完了した後に実行する処理
+  img.onload = () => {
+    // 画像の幅と高さを取得
+    const width = img.naturalWidth;
+    const height = img.naturalHeight;
+
+    // widthとheight属性を追加
+    img.setAttribute('width', String(width));
+    img.setAttribute('height', String(height));
+  };
+
+  // 画像の読み込みを開始
+  img.src = img.getAttribute('src')!;
+}
+
+</script>
+<style></style>

@@ -1,0 +1,82 @@
+---
+interface ListItems {
+  thumb?: string;
+  thumb2?: string;
+  description: string;
+}
+
+interface List {
+  title: string;
+  link?: string;
+  content: ListItems[];
+}
+const faq: List[] = [
+  {
+    title: 'title',
+    content: [
+      {
+        thumb: './images/common/noimage.jpg',
+        description:
+          'てきすとがはいります',
+      },
+      {
+        thumb: './images/common/noimage.jpg',
+        thumb2: './images/common/noimage.jpg',
+        description:
+          'てきすとがはいります',
+      },
+    
+    ],
+  },
+  {
+    title: 'タイトル2',
+    content: [
+      {
+        thumb: './images/common/noimage.jpg',
+        description:
+          'てきすとがはいります',
+      },
+      {
+        thumb: './images/common/noimage.jpg',
+        description:
+          'てきすとがはいります',
+      },
+    ],
+  },
+];
+---
+
+<div class="faqContent">
+  {
+    faq.map((item: List, index: number) => (
+      <div class="contents">
+        <h4>
+          <span class="jp">{item.title}</span>
+        </h4>
+        <div class="inner">
+          {item.content.map((cont: ListItems, subIndex: number) => (
+            <div class={`column column-0${subIndex + 1}`}>
+              <div class="photo">
+                {cont.thumb && <img src={cont.thumb} alt="" />}
+                {cont.thumb2 && <img src={cont.thumb2} alt="" />}
+              </div>
+              <p class="desc">{cont.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  .faqContent {
+    width: min(100%, $pc-s);
+    margin: 0 auto;
+    position: relative;
+    h3 {
+      @include contentsTitle;
+    }
+  }
+  
+</style>

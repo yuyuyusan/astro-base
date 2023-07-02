@@ -1,0 +1,30 @@
+---
+---
+
+<section class="topAbout" id="topAbout">
+  <div class="contentsBody">
+    <div class="container">
+      <div class="inner">
+        <h2>
+          <span class="jp">セクションタイトル</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<style lang="scss">
+  .topAbout {
+    margin-bottom: 80px;
+    .contentsBody {
+      @include sectionBody;
+    }
+  }
+  .topAbout .contentsBody h2 {
+    margin-bottom: 20px;
+    font-size: 27px;
+    font-family: $line;
+    @include tab {
+      font-size: 22px;
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+$pc-m: 1400px;
+$pc-s: 1200px;
+$tab: 960px;
+$sp: 560px;
+$sans: 'Noto Sans JP', sans-serif;
+$line: 'LINESeedJP', sans-serif;
+
+$black: #222;
+$navy: #4a61ab;
+$lightBlue: #ECF0F0;
+$pink: #ee99b0;
+$green: #8fca85;
+$yellow: #fac535;
+$yellow02: #fbe690;
+$yellow03: #f8f6ea;
+$emerald: #5dabaf;
+$beige: #f8f6ea;
+$lightGray: #f0f0f0;
+$brown: #a87d06;
+
+@mixin pc-m {
+  @media screen and (max-width: ($pc-m)) {
+    @content;
+  }
+}
+@mixin pc-s {
+  @media screen and (max-width: ($pc-s)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media screen and (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media screen and (max-width: ($sp)) {
+    @content;
+  }
+}
+@mixin sectionBody($mx: 120px, $width: $pc-s) {
+  width: min(100% - $mx, $width);
+  margin: 0 auto;
+  @include sp {
+    width: min(100% - 40px, $width);
+  }
+}
+
+@mixin commonTitle($color: $navy) {
+  &::first-letter {
+    color: $color;
+  }
+  span {
+    display: inline;
+    line-height: 1.8;
+    background: #fff;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 7px;
+    font-family: $line;
+  }
+  .en {
+    font-size: 77px;
+    @include pc-s {
+      font-size: 62px;
+      @include tab {
+        font-size: 42px;
+        @include sp {
+          font-size: 26px;
+        }
+      }
+    }
+  }
+  .jp {
+    font-size: 25px;
+    color: $color;
+    @include pc-s {
+      font-size: 22px;
+      @include tab {
+        font-size: 20px;
+        @include sp {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+@mixin contentsTitle($color: $yellow, $mb: 25px) {
+  margin: 0 auto $mb;
+  text-align: center;
+  position: relative;
+  .jp {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-family: $line;
+    font-size: 28px;
+    position: relative;
+    @include tab {
+      font-size: 20px;
+    }
+    &::first-letter {
+      color: $color;
+    }
+    &::before {
+      content: '＼';
+      display: inline;
+      position: absolute;
+      left: -10px;
+      transform: translate(-100%, 0) rotate(15deg);
+      font-weight: normal;
+      @include sp {
+        display: none;
+      }
+    }
+    &::after {
+      content: '／';
+      display: inline;
+      position: absolute;
+      right: -10px;
+      transform: translate(100%, 0) rotate(-15deg);
+      font-weight: normal;
+      @include sp {
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin linkButton($color: $navy) {
+  a {
+    display: block;
+    width: fit-content;
+    padding: 10px 30px;
+    border: 2px solid $color;
+    color: $color;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+}
